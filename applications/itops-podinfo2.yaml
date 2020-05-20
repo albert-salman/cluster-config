@@ -43,7 +43,7 @@ spec:
       annotations:
         prometheus.io/scrape: "true"
       labels:
-        app: podinfo
+        app: podinfo2
     spec:
       initContainers:
       - name: init
