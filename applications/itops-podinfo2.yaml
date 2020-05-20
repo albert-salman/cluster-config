@@ -14,7 +14,6 @@ spec:
   # type: LoadBalancer
   ports:
   - port: 9899
-    targetPort: 9899
     nodePort: 30899
     protocol: TCP    
   selector:
