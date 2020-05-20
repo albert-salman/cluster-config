@@ -1,11 +1,32 @@
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: podinfo2
+  namespace: itops
+  labels:
+    app: podinfo2
+spec:
+  # comment or delete the following line if you want to use a LoadBalancer
+  type: NodePort 
+  # if your cluster supports it, uncomment the following to automatically create
+  # an external load-balanced IP for the frontend service.
+  # type: LoadBalancer
+  ports:
+  - port: 9899
+    targetPort: 9899
+    nodePort: 30899
+    protocol: TCP    
+  selector:
+    app: podinfo2
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: podinfo2demo
+  name: podinfo2
   namespace: itops
   labels:
-    app: podinfo
+    app: podinfo2
   annotations:
     flux.weave.works/automated: "true"
     flux.weave.works/tag.init: regex:^3.10.*
@@ -17,7 +38,7 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: podinfo
+      app: podinfo2
   template:
     metadata:
       annotations:
